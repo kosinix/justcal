@@ -1,0 +1,74 @@
+{
+  "run": [
+    { 
+      "period": "prep", 
+      "workout": "6M", 
+      "weights" : "" 
+    },
+    { 
+      "period": "prep",
+      "workout" : "8 x Fast 220s 5K minus 15 secs",
+      "weights" : "" 
+    },
+    { 
+      "period": "prep", 
+      "workout" : "8M", 
+      "weights" : "" 
+    },
+    { 
+      "period": "prep", 
+      "workout" : "10M", 
+      "weights" : "" 
+    },
+    { 
+      "period": "prep", 
+      "workout" : "5 x Mile 5K pace", 
+      "weights" : "" 
+    },
+    { 
+      "period": "prep", 
+      "workout" : "5M", 
+      "weights" : "" 
+    },
+    { 
+      "period": "prep", 
+      "workout" : "9M", 
+      "weights" : "" 
+    },
+    {
+      "period": "prep",
+      "workout":"4M",
+      "weights":""
+    },
+    {
+      "period": "prep",
+      "workout":"8 x 440s 5K pace",
+      "weights":""
+    },
+    {
+      "period": "prep",
+      "workout":"3M",
+      "weights":""
+    },
+    {
+      "period": "prep",
+      "workout":"6M",
+      "weights":""
+    },
+    {
+      "period": "prep",
+      "workout":"5M",
+      "weights":""
+    },
+    {
+      "period": "prep",
+      "workout":"3M",
+      "weights":""
+    },
+    {
+      "period": "prep",
+      "workout":"RACE DAY!",
+      "weights":""
+    }
+  ]
+}

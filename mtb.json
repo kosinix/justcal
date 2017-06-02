@@ -1,0 +1,765 @@
+{
+  "prep": [
+    {
+      "_WEEK": 1,
+      "period": "prep",
+      "workout": "Off | E1",
+      "weights": "AA"
+    },
+    {
+      "period": "prep",
+      "workout": "E2 | Cross Train",
+      "weights": ""
+    },
+    {
+      "period": "prep",
+      "workout": "E1 | Cross Train",
+      "weights": "AA"
+    },
+    {
+      "period": "prep",
+      "workout": "E2 | Cross Train",
+      "weights": ""
+    },
+    {
+      "period": "prep",
+      "workout": "E1 | Cross Train",
+      "weights": "AA"
+    },
+    {
+      "period": "prep",
+      "workout": "E2 | Cross Train",
+      "weights": ""
+    },
+    {
+      "period": "prep",
+      "workout": "E2",
+      "weights": ""
+    },
+    {
+      "_WEEK": 2,
+      "period": "prep",
+      "workout": "Off | E1",
+      "weights": "AA"
+    },
+    {
+      "period": "prep",
+      "workout": "E2 | Cross Train",
+      "weights": ""
+    },
+    {
+      "period": "prep",
+      "workout": "E1 | Cross Train",
+      "weights": "AA"
+    },
+    {
+      "period": "prep",
+      "workout": "E2 | Cross Train",
+      "weights": ""
+    },
+    {
+      "period": "prep",
+      "workout": "E1 | Cross Train",
+      "weights": "AA"
+    },
+    {
+      "period": "prep",
+      "workout": "E2 | Cross Train",
+      "weights": ""
+    },
+    {
+      "period": "prep",
+      "workout": "E2",
+      "weights": ""
+    },
+    {
+      "_WEEK": 3,
+      "period": "prep",
+      "workout": "Off | E1",
+      "weights": "AA"
+    },
+    {
+      "period": "prep",
+      "workout": "E2 | Cross Train",
+      "weights": ""
+    },
+    {
+      "period": "prep",
+      "workout": "E1 | Cross Train",
+      "weights": "AA"
+    },
+    {
+      "period": "prep",
+      "workout": "E2 | Cross Train",
+      "weights": ""
+    },
+    {
+      "period": "prep",
+      "workout": "E1 | Cross Train",
+      "weights": "AA"
+    },
+    {
+      "period": "prep",
+      "workout": "E2 | Cross Train",
+      "weights": ""
+    },
+    {
+      "period": "prep",
+      "workout": "E2",
+      "weights": ""
+    }
+  ],
+  "base1": [
+    {
+      "_WEEK": 1,
+      "period": "base1",
+      "workout": "Off | E1",
+      "weights": "MS"
+    },
+    {
+      "period": "base1",
+      "workout": "S1, S2, S3",
+      "weights": ""
+    },
+    {
+      "period": "base1",
+      "workout": "E2",
+      "weights": ""
+    },
+    {
+      "period": "base1",
+      "workout": "E1 | Cross Train",
+      "weights": "MS"
+    },
+    {
+      "period": "base1",
+      "workout": "S1, S2, S3, S5",
+      "weights": ""
+    },
+    {
+      "period": "base1",
+      "workout": "E2",
+      "weights": ""
+    },
+    {
+      "period": "base1",
+      "workout": "E2",
+      "weights": ""
+    },
+    {
+      "_WEEK": 2,
+      "period": "base1",
+      "workout": "Off | E1",
+      "weights": "MS"
+    },
+    {
+      "period": "base1",
+      "workout": "S1, S2, S3",
+      "weights": ""
+    },
+    {
+      "period": "base1",
+      "workout": "E2",
+      "weights": ""
+    },
+    {
+      "period": "base1",
+      "workout": "E1 | Cross Train",
+      "weights": "MS"
+    },
+    {
+      "period": "base1",
+      "workout": "S1, S2, S3, S5",
+      "weights": ""
+    },
+    {
+      "period": "base1",
+      "workout": "E2",
+      "weights": ""
+    },
+    {
+      "period": "base1",
+      "workout": "E2",
+      "weights": ""
+    },
+    {
+      "_WEEK": 3,
+      "period": "base1",
+      "workout": "Off | E1",
+      "weights": "MS"
+    },
+    {
+      "period": "base1",
+      "workout": "S1, S2, S3",
+      "weights": ""
+    },
+    {
+      "period": "base1",
+      "workout": "E2",
+      "weights": ""
+    },
+    {
+      "period": "base1",
+      "workout": "E1 | Cross Train",
+      "weights": "MS"
+    },
+    {
+      "period": "base1",
+      "workout": "S1, S2, S3, S5",
+      "weights": ""
+    },
+    {
+      "period": "base1",
+      "workout": "E2",
+      "weights": ""
+    },
+    {
+      "period": "base1",
+      "workout": "E2",
+      "weights": ""
+    },
+    {
+      "_WEEK": 4,
+      "period": "base1",
+      "workout": "Off",
+      "weights": "MS, PE, ME | SM"
+    },
+    {
+      "period": "base1",
+      "workout": "E1",
+      "weights": ""
+    },
+    {
+      "period": "base1",
+      "workout": "S1, S2, S3, S4, S5",
+      "weights": ""
+    },
+    {
+      "period": "base1",
+      "workout": "E1",
+      "weights": "MS, PE, (ME)"
+    },
+    {
+      "period": "base1",
+      "workout": "E1",
+      "weights": ""
+    },
+    {
+      "period": "base1",
+      "workout": "TEST | RACE",
+      "weights": ""
+    },
+    {
+      "period": "base1",
+      "workout": "E2",
+      "weights": ""
+    }
+  ],
+  "base2": [
+    {
+      "_WEEK": 1,
+      "period": "base2",
+      "workout": "Off, E1",
+      "weights": "PE"
+    },
+    {
+      "period": "base2",
+      "workout": "S1,S2,S3,S4,S5",
+      "weights": ""
+    },
+    {
+      "period": "base2",
+      "workout": "M1",
+      "weights": ""
+    },
+    {
+      "period": "base2",
+      "workout": "E2",
+      "weights": "PE"
+    },
+    {
+      "period": "base2",
+      "workout": "S1,S2,S3,S4,S5",
+      "weights": ""
+    },
+    {
+      "period": "base2",
+      "workout": "M1",
+      "weights": ""
+    },
+    {
+      "period": "base2",
+      "workout": "F1",
+      "weights": ""
+    },
+    {
+      "_WEEK": 2,
+      "period": "base2",
+      "workout": "Off, E1",
+      "weights": "PE"
+    },
+    {
+      "period": "base2",
+      "workout": "S1,S2,S3,S4,S5",
+      "weights": ""
+    },
+    {
+      "period": "base2",
+      "workout": "M1",
+      "weights": ""
+    },
+    {
+      "period": "base2",
+      "workout": "E2",
+      "weights": "PE"
+    },
+    {
+      "period": "base2",
+      "workout": "S1,S2,S3,S4,S5",
+      "weights": ""
+    },
+    {
+      "period": "base2",
+      "workout": "M1",
+      "weights": ""
+    },
+    {
+      "period": "base2",
+      "workout": "F1",
+      "weights": ""
+    },
+    {
+      "_WEEK": 3,
+      "period": "base2",
+      "workout": "Off, E1",
+      "weights": "PE"
+    },
+    {
+      "period": "base2",
+      "workout": "S1,S2,S3,S4,S5",
+      "weights": ""
+    },
+    {
+      "period": "base2",
+      "workout": "M1",
+      "weights": ""
+    },
+    {
+      "period": "base2",
+      "workout": "E2",
+      "weights": "PE"
+    },
+    {
+      "period": "base2",
+      "workout": "S1,S2,S3,S4,S5",
+      "weights": ""
+    },
+    {
+      "period": "base2",
+      "workout": "M1",
+      "weights": ""
+    },
+    {
+      "period": "base2",
+      "workout": "F1",
+      "weights": ""
+    },
+    {
+      "_WEEK": 4,
+      "period": "base2",
+      "workout": "Off",
+      "weights": "MS, PE, ME | SM"
+    },
+    {
+      "period": "base2",
+      "workout": "E1",
+      "weights": ""
+    },
+    {
+      "period": "base2",
+      "workout": "S1, S2, S3, S4, S5",
+      "weights": ""
+    },
+    {
+      "period": "base2",
+      "workout": "E1",
+      "weights": "MS, PE, (ME)"
+    },
+    {
+      "period": "base2",
+      "workout": "E1",
+      "weights": ""
+    },
+    {
+      "period": "base2",
+      "workout": "TEST | RACE",
+      "weights": ""
+    },
+    {
+      "period": "base2",
+      "workout": "E2",
+      "weights": ""
+    }
+  ],
+  "build1": [
+    {
+      "period": "build1",
+      "workout": "OFF | E1",
+      "weights": "SM"
+    },
+    {
+      "period": "build1",
+      "workout": "P1,P2",
+      "weights": ""
+    },
+    {
+      "period": "build1",
+      "workout": "E2",
+      "weights": ""
+    },
+    {
+      "period": "build1",
+      "workout": "F2,M2,M3(P1-P2 IF SAT RACE)",
+      "weights": ""
+    },
+    {
+      "period": "build1",
+      "workout": "E1",
+      "weights": ""
+    },
+    {
+      "period": "build1",
+      "workout": "A1,A2,A3,A6,RACE",
+      "weights": ""
+    },
+    {
+      "period": "build1",
+      "workout": "E2",
+      "weights": ""
+    },{
+      "period": "build1",
+      "workout": "OFF | E1",
+      "weights": "SM"
+    },
+    {
+      "period": "build1",
+      "workout": "P1,P2",
+      "weights": ""
+    },
+    {
+      "period": "build1",
+      "workout": "E2",
+      "weights": ""
+    },
+    {
+      "period": "build1",
+      "workout": "F2,M2,M3(P1-P2 IF SAT RACE)",
+      "weights": ""
+    },
+    {
+      "period": "build1",
+      "workout": "E1",
+      "weights": ""
+    },
+    {
+      "period": "build1",
+      "workout": "A1,A2,A3,A6,RACE",
+      "weights": ""
+    },
+    {
+      "period": "build1",
+      "workout": "E2",
+      "weights": ""
+    },{
+      "period": "build1",
+      "workout": "OFF | E1",
+      "weights": "SM"
+    },
+    {
+      "period": "build1",
+      "workout": "P1,P2",
+      "weights": ""
+    },
+    {
+      "period": "build1",
+      "workout": "E2",
+      "weights": ""
+    },
+    {
+      "period": "build1",
+      "workout": "F2,M2,M3(P1-P2 IF SAT RACE)",
+      "weights": ""
+    },
+    {
+      "period": "build1",
+      "workout": "E1",
+      "weights": ""
+    },
+    {
+      "period": "build1",
+      "workout": "A1,A2,A3,A6,RACE",
+      "weights": ""
+    },
+    {
+      "period": "build1",
+      "workout": "E2",
+      "weights": ""
+    },
+    {
+      "_WEEK":4,
+      "period": "build1",
+      "workout": "OFF",
+      "weights": "SM"
+    },
+    {
+      "period": "build1",
+      "workout": "E1",
+      "weights": ""
+    },
+    {
+      "period": "build1",
+      "workout": "S1,S2,S3,S4,S5",
+      "weights": ""
+    },
+    {
+      "period": "build1",
+      "workout": "E1",
+      "weights": ""
+    },
+    {
+      "period": "build1",
+      "workout": "E1",
+      "weights": ""
+    },
+    {
+      "period": "build1",
+      "workout": "TEST,RACE",
+      "weights": ""
+    },
+    {
+      "period": "build1",
+      "workout": "E1",
+      "weights": ""
+    }
+  ],
+  "build2":[
+    {
+      "_WEEK": 1,
+      "period": "build2",
+      "workout": "E1",
+      "weights": "SM"
+    },
+    {
+      "period": "build2",
+      "workout": "P1,P2,P3",
+      "weights": ""
+    },
+    {
+      "period": "build2",
+      "workout": "E2",
+      "weights": ""
+    },
+    {
+      "period": "build2",
+      "workout": "M2,M3,M4,M5,M6(P1-P3 IF SAT RACE)",
+      "weights": ""
+    },
+    {
+      "period": "build2",
+      "workout": "E1",
+      "weights": ""
+    },
+    {
+      "period": "build2",
+      "workout": "A1,A2,A3,A6,RACE",
+      "weights": ""
+    },
+    {
+      "period": "build2",
+      "workout": "E2",
+      "weights": ""
+    },
+    {
+      "_WEEK": 2,
+      "period": "build2",
+      "workout": "E1",
+      "weights": "SM"
+    },
+    {
+      "period": "build2",
+      "workout": "P1,P2,P3",
+      "weights": ""
+    },
+    {
+      "period": "build2",
+      "workout": "E2",
+      "weights": ""
+    },
+    {
+      "period": "build2",
+      "workout": "M2,M3,M4,M5,M6(P1-P3 IF SAT RACE)",
+      "weights": ""
+    },
+    {
+      "period": "build2",
+      "workout": "E1",
+      "weights": ""
+    },
+    {
+      "period": "build2",
+      "workout": "A1,A2,A3,A6,RACE",
+      "weights": ""
+    },
+    {
+      "period": "build2",
+      "workout": "E2",
+      "weights": ""
+    },
+    {
+      "_WEEK": 3,
+      "period": "build2",
+      "workout": "E1",
+      "weights": "SM"
+    },
+    {
+      "period": "build2",
+      "workout": "P1,P2,P3",
+      "weights": ""
+    },
+    {
+      "period": "build2",
+      "workout": "E2",
+      "weights": ""
+    },
+    {
+      "period": "build2",
+      "workout": "M2,M3,M4,M5,M6(P1-P3 IF SAT RACE)",
+      "weights": ""
+    },
+    {
+      "period": "build2",
+      "workout": "E1",
+      "weights": ""
+    },
+    {
+      "period": "build2",
+      "workout": "A1,A2,A3,A6,RACE",
+      "weights": ""
+    },
+    {
+      "period": "build2",
+      "workout": "E2",
+      "weights": ""
+    },
+    {
+      "_WEEK":4,
+      "period": "build2",
+      "workout": "OFF",
+      "weights": "SM"
+    },
+    {
+      "period": "build2",
+      "workout": "E1",
+      "weights": ""
+    },
+    {
+      "period": "build2",
+      "workout": "S1,S2,S3,S4,S5",
+      "weights": ""
+    },
+    {
+      "period": "build2",
+      "workout": "E1",
+      "weights": ""
+    },
+    {
+      "period": "build2",
+      "workout": "E1",
+      "weights": ""
+    },
+    {
+      "period": "build2",
+      "workout": "TEST,RACE",
+      "weights": ""
+    },
+    {
+      "period": "build2",
+      "workout": "E1",
+      "weights": ""
+    }
+  ],
+  "peak": [
+    {
+      "period": "peak",
+      "workout": "OFF",
+      "weights": "SM"
+    },
+    {
+      "period": "peak",
+      "workout": "E2",
+      "weights": ""
+    },
+    {
+      "period": "peak",
+      "workout": "M2-M6,A2-A7,P1-P3",
+      "weights": ""
+    },
+    {
+      "period": "peak",
+      "workout": "E2",
+      "weights": ""
+    },
+    {
+      "period": "peak",
+      "workout": "E1",
+      "weights": ""
+    },
+    {
+      "period": "peak",
+      "workout": "RACE, M2-M6,A2-A7,P1-P3",
+      "weights": ""
+    },
+    {
+      "period": "peak",
+      "workout": "E1",
+      "weights": ""
+    }
+  ],
+  "raceSunday": [
+    {
+      "period": "race",
+      "workout": "OFF",
+      "weights": ""
+    },
+    {
+      "period": "race",
+      "workout": "M2,M3,M6,A1-A7,P1-P3",
+      "weights": ""
+    },
+    {
+      "period": "race",
+      "workout": "E1",
+      "weights": ""
+    },
+    {
+      "period": "race",
+      "workout": "P1-P3",
+      "weights": ""
+    },
+    {
+      "period": "race",
+      "workout": "E1,OFF",
+      "weights": ""
+    },
+    {
+      "period": "race",
+      "workout": "REHEARSE WARMP-UP",
+      "weights": ""
+    },
+    {
+      "period": "race",
+      "workout": "SUNDAY RACE",
+      "weights": ""
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "name": "justcal",
+  "version": "1.0.0",
+  "description": "Just a calendar view",
+  "main": "index.js",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "express": "^4.15.2",
+    "express-nunjucks": "^2.2.3",
+    "jsonloader": "^1.0.1",
+    "lodash": "^4.17.4",
+    "moment": "^2.18.1",
+    "nunjucks": "^3.0.0",
+    "sqlite3": "^3.1.8"
+  },
+  "devDependencies": {
+    "supervisor": "^0.12.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
