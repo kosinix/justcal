@@ -15,31 +15,14 @@ td p {
     margin: 0;
     white-space: nowrap;
 }
-.prep {
-    background: #e9e9ff;
-}
-.base1 {
-    background: #a8a8ff;
-}
-.base2,
-.base2rr {
-    background: #8080ff;
-}
-.build {
-    background: #7676ff;
-}
-.peak {
-    background: #4f5dff;
-}
-.race {
-    background: #4f4fff;
-    color: #fefefe;
-}
-.now {
-    background: #ffb6b6;
-}
 
 td.prefix,
 td.suffix {
     color: #bbb;
+}
+td.now {
+    background: #ffb6b6;
+}
+td > div {
+    min-height: 50px;
 }

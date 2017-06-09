@@ -60,23 +60,8 @@ app.use(defaulter);
 
 // Routes
 app.get('/', (req, res) => {
-  
-  // var trainingList = lodash.concat(config.prep, config.base1, config.base2, config.build1, config.build2, config.peak, config.raceSunday);
-  // Init
-  var now = moment();
-  var year = req.query.year;
-  var month = req.query.month;
-  var eventDate = moment('2017-06-12');
-  // var trainingData = training.trainingCreate(eventDate, trainingList);
-  var month = calendar.calendarMonth(parseInt(month)-1, year, trainingData={});
-  
-  var vars = {
-    month: month,
-    now: now,
-    trainingData: trainingData
-  };
 
-  res.render('index.html', vars );
+  res.send('Running...');
 });
 app.get('/month/:year/:month', (req, res) => {
 
@@ -84,11 +69,11 @@ app.get('/month/:year/:month', (req, res) => {
   // TODO: sanity checks
   var year = req.params.year;
   var month = req.params.month;
-  var weekStart = 0; // 0-6.0 is Sun
-  var cal = calendar.calendarMonth(parseInt(month)-1, year, weekStart);
+  var weekStart = 6; // 0-6. Where 0 is Sun, 1 is Mon ... so on..
+  var padMode = 0; // 0 - Blank pads. 1 - Use neighboring calendar days.
+  var cal = calendar.calendarMonth(parseInt(month)-1, year, weekStart, padMode);
   var weekDays = ["Sun", "Mon", "Tue", "Wed", "Thur", "Fri", "Sat"];
-  var weekDays = lodash.concat(lodash.slice(weekDays, weekStart), lodash.slice(weekDays,0,weekStart));
-  console.log(weekDays);
+  var weekDays = lodash.concat(lodash.slice(weekDays, weekStart), lodash.slice(weekDays, 0, weekStart));
   var vars = {
     month: cal,
     now: now,
