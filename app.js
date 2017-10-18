@@ -4,7 +4,7 @@ const moment = require('moment');
 const bodyParser = require('body-parser')
 const lodash = require('lodash');
 const jsonloader = require('jsonloader'); // json-loader
-const calendar = require('./src/calendar');
+const kalendaryo = require('./src/kalendaryo');
 const training = require('./src/training');
 
 // App
@@ -60,18 +60,23 @@ app.use(defaulter);
 
 // Routes
 app.get('/', (req, res) => {
-
   res.send('Running...');
 });
-app.get('/month/:year/:month', (req, res) => {
 
+app.get('/month/:year/:month', (req, res) => {
   var now = moment();
+
   // TODO: sanity checks
-  var year = req.params.year;
-  var month = req.params.month;
+  var year = parseInt(req.params.year);
+  var month = parseInt(req.params.month);
   var weekStart = 6; // 0-6. Where 0 is Sun, 1 is Mon ... so on..
-  var padMode = 0; // 0 - Blank pads. 1 - Use neighboring calendar days.
-  var cal = calendar.calendarMonth(parseInt(month)-1, year, weekStart, padMode);
+  var padMode = 1; // 0 - Blank pads. 1 - Use neighboring calendar days.
+  var timeZone = 0; // Possible values: -12 to 14
+
+  var cal = new kalendaryo.CalendarMonth(year, month, weekStart, padMode, function(day){
+    day.extra = 'service';
+    return day;
+  });
   var weekDays = ["Sun", "Mon", "Tue", "Wed", "Thur", "Fri", "Sat"];
   var weekDays = lodash.concat(lodash.slice(weekDays, weekStart), lodash.slice(weekDays, 0, weekStart));
   var vars = {
@@ -87,8 +92,8 @@ app.listen(3000, function () {
   console.log('Example app listening on port 3000!')
 })
 
-var sqlite3 = require('sqlite3').verbose()
-var db = new sqlite3.Database('app.db')
+// var sqlite3 = require('sqlite3').verbose()
+// var db = new sqlite3.Database('app.db')
 
 // db.serialize(function () {
 //   db.run('CREATE TABLE IF NOT EXISTS lorem (info TEXT)')
@@ -105,4 +110,4 @@ var db = new sqlite3.Database('app.db')
 //   })
 // })
 
-db.close()
+// db.close()

@@ -1,17 +1,18 @@
 {% extends "parent.html" %}
 
 {% block body %}
+
 <div class="row action-bar">
     <div class="col-md-6">
         <a href="{{baseUrl}}/month/{{now.format('YYYY')}}/{{now.format('MM')}}" class="btn btn-default" aria-label="Today">
             <span class="glyphicon glyphicon-time" aria-hidden="true"></span>
             <span>Today</span>
         </a>
-        <a href="{{baseUrl}}/month/{{ month.prevMonthYear }}/{{ month.prevMonthId+1 }} " class="btn btn-default" aria-label="Left Align">
+        <a href="{{baseUrl}}/month/{{ month.prevMonthYear }}/{{ month.prevMonthNumber }} " class="btn btn-default" aria-label="Left Align">
             <span class="glyphicon glyphicon-step-backward" aria-hidden="true"></span>
             <span>Prev</span>
         </a>
-        <a class="btn btn-default" href="{{baseUrl}}/month/{{ month.nextMonthYear }}/{{ month.nextMonthId+1 }} ">
+        <a class="btn btn-default" href="{{baseUrl}}/month/{{ month.nextMonthYear }}/{{ month.nextMonthNumber }} ">
             <span class="glyphicon glyphicon-step-forward" aria-hidden="true"></span>
             <span>Next</span>
         </a>
