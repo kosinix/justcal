@@ -3,30 +3,35 @@
 {% block body %}
 
 <div class="row action-bar">
-    <div class="col-md-6">
+    <div class="col-md-4 action-today">
         <a href="{{baseUrl}}/month/{{now.format('YYYY')}}/{{now.format('MM')}}" class="btn btn-default" aria-label="Today">
-            <span class="glyphicon glyphicon-time" aria-hidden="true"></span>
             <span>Today</span>
         </a>
-        <a href="{{baseUrl}}/month/{{ month.prevMonthYear }}/{{ month.prevMonthNumber }} " class="btn btn-default" aria-label="Left Align">
-            <span class="glyphicon glyphicon-step-backward" aria-hidden="true"></span>
-            <span>Prev</span>
-        </a>
-        <a class="btn btn-default" href="{{baseUrl}}/month/{{ month.nextMonthYear }}/{{ month.nextMonthNumber }} ">
-            <span class="glyphicon glyphicon-step-forward" aria-hidden="true"></span>
-            <span>Next</span>
-        </a>
     </div>
-    
+    <div class="col-md-4 action-year">
+        <a href="#">{{ month.name }} {{ month.year }}</a>
+    </div>
+    <div class="col-md-4 action-page">
+        
+
+        <div class="btn-group" role="group" aria-label="pagination">
+            <a href="{{baseUrl}}/month/{{ month.prevMonthYear }}/{{ month.prevMonthNumber }} " class="btn btn-default" aria-label="Left Align">
+                <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+            </a>
+            <a class="btn btn-default" href="{{baseUrl}}/month/{{ month.nextMonthYear }}/{{ month.nextMonthNumber }} ">
+                <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+            </a>
+        </div>
+    </div>
 </div>
 <div class="row">
     <!--<pre>{{ trainingData | dump }}</pre>-->
     <div class="col-md-12">
-        <h1>{{ month.name }} {{ month.year }} </h1>
-        <table class="table">
+       
+        <table class="table calendar">
             <thead>
                 <tr>
-                    {% for weekDay in weekDays %}
+                    {% for weekDay in month.weekDays %}
                         <th>{{weekDay}}</th>
                     {% endfor %}
                 </tr>
@@ -37,8 +42,21 @@
                     {% for date in week %}
                         {% set class = date.type %}
                         <td class="{{class}}">
-                            <div>
-                                {{date.day}}
+                            <div class="date">
+                                <div class="day">
+                                    {{date.day}}
+                                </div>
+                                {% if date.type == 'day now' %}
+                                <div class="event">
+                                    Weight
+                                </div>
+                                <div class="event event-alt">
+                                    Run
+                                </div>
+                                <div class="event">
+                                    Swim
+                                </div>
+                                {% endif %}
                             </div>
                         </td>
                     {% endfor %}

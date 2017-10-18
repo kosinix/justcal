@@ -44,10 +44,21 @@ var helper = {
     var offset = new Date().getTimezoneOffset(); 
     // Note: The 0 is to negate the offset because JS returns a negative number instead of a sane positive one.
     return 0 - (offset/60); 
+  },
+
+  /**
+   * Get weekdays in an array
+   * 
+   * @param {number} weekStart The start of the week. Range from 0 to 6. Eg. 0-Sun, 1-Mon, ... 6-Sat
+   * @return {Array} Array containing string names
+   */
+  getWeekDays: function(weekStart=0){
+    var weekDays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+    return lodash.concat(lodash.slice(weekDays, weekStart), lodash.slice(weekDays, 0, weekStart));
   }
 }
 
-class CalendarMonth {
+class MonthView {
   /**
    * Create a month calendar
    * 
@@ -55,18 +66,13 @@ class CalendarMonth {
    * @param {number} year 1979- 2100
    * @param {number} weekStart 0-6
    * @param {number} padMode 0-1
+   * @param {Function} dayCallBack Map values to something else for date
+   * @param {Function} prefixCallBack Map values to something else for date prefix
+   * @param {Function} suffixCallBack Map values to something else for date suffix
    */
   constructor(year, month, weekStart=0, padMode=0, dayCallBack=null, prefixCallBack=null, suffixCallBack=null){
     
-    this.dayCallBack = dayCallBack;
-    this.prefixCallBack = prefixCallBack;
-    this.suffixCallBack = suffixCallBack;
     
-    if(this.dayCallBack===null){
-      this.dayCallBack = function(day){
-        return day;
-      }
-    }
     this.momentNow = moment.utc();
     var isoDateString = helper.isoDate(year, month, 1); // First day of specific month
     this.momentCurrentMonth = moment.utc(isoDateString); 
@@ -82,6 +88,7 @@ class CalendarMonth {
     this.padMode = padMode; // 0-1
     this.name = this.momentCurrentMonth.format('MMM'); // String month name
     this.days = this.momentCurrentMonth.daysInMonth(); // Total month days. 1-n
+    this.weekDays = helper.getWeekDays(weekStart);
     this.weekDayFirst = parseInt(this.momentCurrentMonth.format('d')); // First day of week. Zero-based. 0-6
     this.weekDayLast = parseInt(moment.utc(isoDateString).endOf('month').format('d')); // This months last day of week. Zero-based. 0-6
     this.matrix = [];
@@ -89,6 +96,28 @@ class CalendarMonth {
     this.prevMonthNumber = this.momentPrevMonth.format('M');
     this.nextMonthYear = this.momentNextMonth.format('YYYY');
     this.nextMonthNumber = this.momentNextMonth.format('M');
+
+    this.dayCallBack = dayCallBack;
+    this.prefixCallBack = prefixCallBack;
+    this.suffixCallBack = suffixCallBack;
+    
+    if(this.dayCallBack===null){
+      this.dayCallBack = function(day){
+        return day;
+      }
+    }
+    if(this.prefixCallBack===null){
+      this.prefixCallBack = function(day){
+        return day;
+      }
+    }
+    if(this.suffixCallBack===null){
+      this.suffixCallBack = function(day){
+        return day;
+      }
+    }
+
+
     this.matrixes();
 
   }
@@ -155,6 +184,7 @@ class CalendarMonth {
         }
       }, this);
     }
+    prefix = prefix.map(this.prefixCallBack, this);
     return prefix;
   }
 
@@ -195,6 +225,8 @@ class CalendarMonth {
           }
         }, this);
     }
+    suffix = suffix.map(this.suffixCallBack, this);
+    
     return suffix;
   }
 
@@ -202,6 +234,9 @@ class CalendarMonth {
 
 
 module.exports = {
-  CalendarMonth: CalendarMonth,
+  DayView: {},
+  MonthView: MonthView,
+  YearView: {},
+  DecadeView: {},
   helper: helper
 };

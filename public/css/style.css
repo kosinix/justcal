@@ -1,9 +1,19 @@
+body {
+    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+}
 body > .container {
     padding-top: 80px;
 }
 
 .action-bar {
     padding: 10px 0;
+}
+
+.calendar thead tr th {
+    background: #DDDDDD;
+    text-align: center;
+    padding: 10px 0;
+    border: 1px solid #ddd;
 }
 
 td {
@@ -20,9 +30,47 @@ td.prefix,
 td.suffix {
     color: #bbb;
 }
-td.now {
-    background: #ffb6b6;
+.table > tbody > tr> td {
+    padding: 0;
 }
-td > div {
-    min-height: 50px;
+.date {
+    min-height: 100px;
+    padding: 10px;
+}
+.now .date {
+    border:1px solid #F05722;
+    box-shadow: 0 0 5px #F05722;
+}
+.date .day {
+    padding: 5px 0;
+}
+
+.date .event {
+    background: #029AE4;
+    color: #fff;
+    border-radius: 2px;
+    padding: 5px 8px;
+    margin-top: 2px;
+    line-height: 1.2;
+}
+.date .event-alt {
+    background: #33B679;
+}
+
+.action-today {
+    text-align: left;
+}
+.action-year {
+    text-align: center;
+}
+.action-year a {
+    font-size: 18px;
+    line-height: 1.2;
+    display: inline-block;
+    color: #111;
+    font-weight: bold;
+    padding: 6px;
+}
+.action-page {
+    text-align: right;
 }

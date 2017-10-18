@@ -69,20 +69,24 @@ app.get('/month/:year/:month', (req, res) => {
   // TODO: sanity checks
   var year = parseInt(req.params.year);
   var month = parseInt(req.params.month);
-  var weekStart = 6; // 0-6. Where 0 is Sun, 1 is Mon ... so on..
+  var weekStart = 0; // 0-6. Where 0 is Sun, 1 is Mon ... so on..
   var padMode = 1; // 0 - Blank pads. 1 - Use neighboring calendar days.
   var timeZone = 0; // Possible values: -12 to 14
 
-  var cal = new kalendaryo.CalendarMonth(year, month, weekStart, padMode, function(day){
-    day.extra = 'service';
-    return day;
+  var monthView = new kalendaryo.MonthView(year, month, weekStart, padMode, function(dateObj){
+    dateObj.extra = 'service';
+    return dateObj;
+  }, function(dateObj){
+    dateObj.day += ' prefix';
+    return dateObj;
+  }, function(dateObj){
+    dateObj.day += ' suffix';
+    return dateObj;
   });
-  var weekDays = ["Sun", "Mon", "Tue", "Wed", "Thur", "Fri", "Sat"];
-  var weekDays = lodash.concat(lodash.slice(weekDays, weekStart), lodash.slice(weekDays, 0, weekStart));
+  
   var vars = {
-    month: cal,
-    now: now,
-    weekDays: weekDays
+    month: monthView,
+    now: now
   };
 
   res.render('month.html', vars );
