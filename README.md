@@ -1,10 +1,17 @@
 # REQUIREMENTS
 
+## Prod
 * nodejs + npm
+
+## Dev
+* nodejs +n pm
+* nodemon
 
 # DEV
 
 ## Install
+
+Download zip from github and extract
 
 CLI:
 
@@ -14,7 +21,7 @@ CLI:
 
 To start server with supervisor:
 
-`.\node_modules\.bin\supervisor app.js`
+`nodemon app.js`
 
 To end process: 
 
