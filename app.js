@@ -73,15 +73,21 @@ app.get('/month/:year/:month', (req, res) => {
   var padMode = 1; // 0 - Blank pads. 1 - Use neighboring calendar days.
   var timeZone = 0; // Possible values: -12 to 14
 
-  var monthView = new kalendaryo.MonthView(year, month, weekStart, padMode, function(dateObj){
-    dateObj.extra = 'service';
-    return dateObj;
-  }, function(dateObj){
-    dateObj.day += ' prefix';
-    return dateObj;
-  }, function(dateObj){
-    dateObj.day += ' suffix';
-    return dateObj;
+  var monthView = new kalendaryo.MonthView(year, month, {
+    weekStart: weekStart, 
+    padMode: padMode, 
+    dayCallBack: function(dateObj){
+      dateObj.extra = 'This is an extra info added';
+      return dateObj;
+    }, 
+    prefixCallBack: function(dateObj){
+      dateObj.day += ' prefix';
+      return dateObj;
+    }, 
+    suffixCallBack: function(dateObj){
+      dateObj.day += ' suffix';
+      return dateObj;
+    }
   });
   
   var vars = {
@@ -94,24 +100,4 @@ app.get('/month/:year/:month', (req, res) => {
 
 app.listen(3000, function () {
   console.log('Example app listening on port 3000!')
-})
-
-// var sqlite3 = require('sqlite3').verbose()
-// var db = new sqlite3.Database('app.db')
-
-// db.serialize(function () {
-//   db.run('CREATE TABLE IF NOT EXISTS lorem (info TEXT)')
-//   var stmt = db.prepare('INSERT INTO lorem VALUES (?)')
-
-//   for (var i = 0; i < 10; i++) {
-//     stmt.run('Ipsum ' + i)
-//   }
-
-//   stmt.finalize()
-
-//   db.each('SELECT rowid AS id, info FROM lorem', function (err, row) {
-//     console.log(row.id + ': ' + row.info)
-//   })
-// })
-
-// db.close()
+});

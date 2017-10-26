@@ -62,17 +62,35 @@ class MonthView {
   /**
    * Create a month calendar
    * 
-   * @param {number} month 1-12
-   * @param {number} year 1979- 2100
-   * @param {number} weekStart 0-6
-   * @param {number} padMode 0-1
-   * @param {Function} dayCallBack Map values to something else for date
-   * @param {Function} prefixCallBack Map values to something else for date prefix
-   * @param {Function} suffixCallBack Map values to something else for date suffix
+   * @param {number} month - Eg. 1-12
+   * @param {number} year - Eg. 1979- 2100
+   * @param {Object} [config] - The extra configuration options. All optional.
    */
-  constructor(year, month, weekStart=0, padMode=0, dayCallBack=null, prefixCallBack=null, suffixCallBack=null){
+  constructor(year, month, config){
+    /**
+     * @namespace
+     * @property {number} weekStart - Values: 0-6
+     * @property {number} padMode - Values: 0-1
+     * @property {Function} dayCallBack - Map values to something else for date.
+     * @property {Function} prefixCallBack - Map values to something else for date prefix.
+     * @property {Function} suffixCallBack - Map values to something else for date suffix.
+    */
+    var defaults = {
+      weekStart: 0,
+      padMode: 0,
+      dayCallBack: function(day){
+        return day;
+      },
+      prefixCallBack: function(day){
+        return day;
+      },
+      suffixCallBack: function(day){
+        return day;
+      }
+    };
     
-    
+    config = Object.assign(defaults, config);
+
     this.momentNow = moment.utc();
     var isoDateString = helper.isoDate(year, month, 1); // First day of specific month
     this.momentCurrentMonth = moment.utc(isoDateString); 
@@ -84,11 +102,11 @@ class MonthView {
 
     this.year = year; // Year
     this.month = month; // Month 1-12    
-    this.weekStart = weekStart; // 0-6 where 0 is Sunday and 6 is Saturday
-    this.padMode = padMode; // 0-1
+    this.weekStart = config.weekStart; // 0-6 where 0 is Sunday and 6 is Saturday
+    this.padMode = config.padMode; // 0-1
     this.name = this.momentCurrentMonth.format('MMM'); // String month name
     this.days = this.momentCurrentMonth.daysInMonth(); // Total month days. 1-n
-    this.weekDays = helper.getWeekDays(weekStart);
+    this.weekDays = helper.getWeekDays(this.weekStart);
     this.weekDayFirst = parseInt(this.momentCurrentMonth.format('d')); // First day of week. Zero-based. 0-6
     this.weekDayLast = parseInt(moment.utc(isoDateString).endOf('month').format('d')); // This months last day of week. Zero-based. 0-6
     this.matrix = [];
@@ -97,27 +115,10 @@ class MonthView {
     this.nextMonthYear = this.momentNextMonth.format('YYYY');
     this.nextMonthNumber = this.momentNextMonth.format('M');
 
-    this.dayCallBack = dayCallBack;
-    this.prefixCallBack = prefixCallBack;
-    this.suffixCallBack = suffixCallBack;
+    this.dayCallBack = config.dayCallBack;
+    this.prefixCallBack = config.prefixCallBack;
+    this.suffixCallBack = config.suffixCallBack;
     
-    if(this.dayCallBack===null){
-      this.dayCallBack = function(day){
-        return day;
-      }
-    }
-    if(this.prefixCallBack===null){
-      this.prefixCallBack = function(day){
-        return day;
-      }
-    }
-    if(this.suffixCallBack===null){
-      this.suffixCallBack = function(day){
-        return day;
-      }
-    }
-
-
     this.matrixes();
 
   }
