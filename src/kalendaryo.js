@@ -69,8 +69,9 @@ class MonthView {
   constructor(year, month, config){
     /**
      * @namespace
-     * @property {number} weekStart - Values: 0-6
-     * @property {number} padMode - Values: 0-1
+     * @property {number} weekStart - Values: 0 to 6
+     * @property {number} padMode - Values: 0 to 1
+     * @property {number} timeZone - Values: -12 to 14
      * @property {Function} dayCallBack - Map values to something else for date.
      * @property {Function} prefixCallBack - Map values to something else for date prefix.
      * @property {Function} suffixCallBack - Map values to something else for date suffix.
@@ -78,6 +79,7 @@ class MonthView {
     var defaults = {
       weekStart: 0,
       padMode: 0,
+      timeZone: 0,
       dayCallBack: function(day){
         return day;
       },
@@ -91,7 +93,7 @@ class MonthView {
     
     config = Object.assign(defaults, config);
 
-    this.momentNow = moment.utc();
+    this.momentNow = moment.utc().add(config.timeZone, 'hours');
     var isoDateString = helper.isoDate(year, month, 1); // First day of specific month
     this.momentCurrentMonth = moment.utc(isoDateString); 
     if(!this.momentCurrentMonth.isValid()){
@@ -233,9 +235,49 @@ class MonthView {
 
 }
 
+class DayView {
+  /**
+   * Create a day view for calendar
+   * 
+   * @param {number} year - Eg. 1979 to 2999
+   * @param {number} month - Eg. 1 to 12
+   * @param {number} day - Eg. 1 to 31
+   * @param {Object} [config] - The extra configuration options. All optional.
+   */
+  constructor(year, month, day, config){
+    /**
+     * @namespace
+     * @property {number} timeZone - Hour difference from UTC-0. Values: -12 to 14
+    */
+    var defaults = {
+      timeZone: 0,
+    };
+    
+    config = Object.assign(defaults, config);
 
+    /**
+     * @property {number} year - Number representing the year.
+     * @property {number} month - Number representing the month. Values: 1 to 12
+     * @property {number} day - Number representing the day. Values: 1 to 31
+     */
+    this.year = year;
+    this.month = month;
+    this.day = day;
+
+    var isoDateString = helper.isoDate(year, month, day);
+    
+    /**
+     * @property {Moment} moment - Instance of momentjs representing current day.
+     * @property {Moment} prevDay - Instance of momentjs representing previous day.
+     * @property {Moment} nextDay - Instance of momentjs representing next day.
+     */
+    this.moment = moment.utc(isoDateString).add(config.timeZone, 'hours');
+    this.prevDay = moment.utc(isoDateString).add(config.timeZone, 'hours').subtract(1, 'days');
+    this.nextDay = moment.utc(isoDateString).add(config.timeZone, 'hours').add(1, 'days');
+  }
+}
 module.exports = {
-  DayView: {},
+  DayView: DayView,
   MonthView: MonthView,
   YearView: {},
   DecadeView: {},
