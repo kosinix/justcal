@@ -60,32 +60,23 @@ app.use(defaulter);
 
 // Routes
 app.get('/', (req, res) => {
-  res.send('Running...');
+  var def = moment.utc().format('YYYY/MM');
+  res.redirect(def);
 });
 
-app.get('/month/:year/:month', (req, res) => {
+app.get('/:year/:month', (req, res) => {
   var now = moment();
 
   // TODO: sanity checks
   var year = parseInt(req.params.year);
   var month = parseInt(req.params.month);
-  var weekStart = 0; // 0-6. Where 0 is Sun, 1 is Mon ... so on..
-  var padMode = 1; // 0 - Blank pads. 1 - Use neighboring calendar days.
   var timeZone = 0; // Possible values: -12 to 14
 
   var monthView = new kalendaryo.MonthView(year, month, {
-    weekStart: weekStart, 
-    padMode: padMode, 
+    weekStart: 0,  // 0-6. Where 0 is Sun, 1 is Mon ... so on..
+    padMode: 1, // 0 - Blank pads. 1 - Use neighboring calendar days.
     dayCallBack: function(dateObj){
       dateObj.extra = 'This is an extra info added';
-      return dateObj;
-    }, 
-    prefixCallBack: function(dateObj){
-      dateObj.day += ' prefix';
-      return dateObj;
-    }, 
-    suffixCallBack: function(dateObj){
-      dateObj.day += ' suffix';
       return dateObj;
     }
   });

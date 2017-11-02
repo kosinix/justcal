@@ -4,7 +4,7 @@
 
 <div class="row action-bar">
     <div class="col-md-4 action-today">
-        <a href="{{baseUrl}}/month/{{now.format('YYYY')}}/{{now.format('MM')}}" class="btn btn-default" aria-label="Today">
+        <a href="{{baseUrl}}/{{now.format('YYYY')}}/{{now.format('MM')}}" class="btn btn-default" aria-label="Today">
             <span>Today</span>
         </a>
     </div>
@@ -15,10 +15,10 @@
         
 
         <div class="btn-group" role="group" aria-label="pagination">
-            <a href="{{baseUrl}}/month/{{ month.prevMonthYear }}/{{ month.prevMonthNumber }} " class="btn btn-default" aria-label="Left Align">
+            <a href="{{baseUrl}}/{{ month.prevMonthYear }}/{{ month.prevMonthNumber }} " class="btn btn-default" aria-label="Left Align">
                 <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
             </a>
-            <a class="btn btn-default" href="{{baseUrl}}/month/{{ month.nextMonthYear }}/{{ month.nextMonthNumber }} ">
+            <a class="btn btn-default" href="{{baseUrl}}/{{ month.nextMonthYear }}/{{ month.nextMonthNumber }} ">
                 <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
             </a>
         </div>
