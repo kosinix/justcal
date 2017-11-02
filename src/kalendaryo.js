@@ -1,3 +1,7 @@
+/**
+ * Module for displaying a Gregorian calendar
+ */
+
 const lodash = require('lodash');
 const moment = require('moment');
 const util = require('util');
@@ -58,6 +62,29 @@ var helper = {
   }
 }
 
+var DayType = {
+  prefix: 'prefix',
+  day: 'day',
+  suffix: 'suffix',
+}
+
+/**
+ * Represent a calendar day
+ */
+class DayObject {
+  constructor(isToday, type, year, month, day, iso){
+    this.isToday = isToday;
+    this.type = type;
+    this.year = year;
+    this.month = month;
+    this.day = day;
+    this.iso = iso;
+  }
+}
+
+/**
+ * A calendar's month view
+ */
 class MonthView {
   /**
    * Create a month calendar
@@ -69,7 +96,7 @@ class MonthView {
   constructor(year, month, config){
     /**
      * @namespace
-     * @property {number} weekStart - Values: 0 to 6
+     * @property {number} weekStart - Values: 0 to 6. Where 0 is Sunday and 6 is Saturday.
      * @property {number} padMode - Values: 0 to 1
      * @property {number} timeZone - Values: -12 to 14
      * @property {Function} dayCallBack - Map values to something else for date.
@@ -91,9 +118,9 @@ class MonthView {
       }
     };
     
-    config = Object.assign(defaults, config);
+    this.config = Object.assign(defaults, config);
 
-    this.momentNow = moment.utc().add(config.timeZone, 'hours');
+    this.momentNow = moment.utc().add(this.config.timeZone, 'hours');
     var isoDateString = helper.isoDate(year, month, 1); // First day of specific month
     this.momentCurrentMonth = moment.utc(isoDateString); 
     if(!this.momentCurrentMonth.isValid()){
@@ -103,12 +130,10 @@ class MonthView {
     this.momentNextMonth = moment.utc(isoDateString).endOf('month').add(1, 'days'); // Move to last day of month, then add 1 day
 
     this.year = year; // Year
-    this.month = month; // Month 1-12    
-    this.weekStart = config.weekStart; // 0-6 where 0 is Sunday and 6 is Saturday
-    this.padMode = config.padMode; // 0-1
+    this.month = month; // Month 1-12
     this.name = this.momentCurrentMonth.format('MMM'); // String month name
     this.days = this.momentCurrentMonth.daysInMonth(); // Total month days. 1-n
-    this.weekDays = helper.getWeekDays(this.weekStart);
+    this.weekDays = helper.getWeekDays(this.config.weekStart); // Array containing names of the days of the week (Sun, Mon, etc).
     this.weekDayFirst = parseInt(this.momentCurrentMonth.format('d')); // First day of week. Zero-based. 0-6
     this.weekDayLast = parseInt(moment.utc(isoDateString).endOf('month').format('d')); // This months last day of week. Zero-based. 0-6
     this.matrix = [];
@@ -117,9 +142,9 @@ class MonthView {
     this.nextMonthYear = this.momentNextMonth.format('YYYY');
     this.nextMonthNumber = this.momentNextMonth.format('M');
 
-    this.dayCallBack = config.dayCallBack;
-    this.prefixCallBack = config.prefixCallBack;
-    this.suffixCallBack = config.suffixCallBack;
+    this.dayCallBack = this.config.dayCallBack;
+    this.prefixCallBack = this.config.prefixCallBack;
+    this.suffixCallBack = this.config.suffixCallBack;
     
     this.matrixes();
 
@@ -127,110 +152,76 @@ class MonthView {
 
   matrixes(){
     
-    var days = helper.generateDays(this.days);
+    var days = helper.generateDays(this.days); // Generate days for this month
       
     days = days.map(function(day){
       var isoDateString = helper.isoDate(this.year, this.month, day);
       var monthDay = moment.utc(isoDateString);
-      var nowString = (this.momentNow.format('YYYY-MM-DD') === monthDay.format("YYYY-MM-DD")) ? " now" : "";
+      var isToday = (this.momentNow.format('YYYY-MM-DD') === monthDay.format("YYYY-MM-DD"));
 
-
-      return {
-        type: "day"+nowString,
-        year: this.year,
-        month: this.month,
-        day: day,
-        iso: isoDateString
-      }
+      return new DayObject(isToday, DayType.day, this.year, this.month, day, isoDateString);
       
+      //   date: isoDateString.split('T')[0], // Just the YYYY-MM-DD
     }, this).map(this.dayCallBack, this);
 
     // Prepend prefix and append suffix to matrix
-    this.matrix = lodash.concat(this.prefix(this.padMode), days, this.suffix(this.padMode)); 
+    this.matrix = lodash.concat(this.prefix(this.config.padMode), days, this.suffix(this.config.padMode)); 
 
     // 1D into 2D array
     this.matrix = lodash.chunk(this.matrix, 7);
   }
 
   prefix(padMode){
-    // Prefix formula
-    var prefixLength = this.weekDayFirst - this.weekStart;
+    // Prefix length formula
+    var prefixLength = this.weekDayFirst - this.config.weekStart;
     if(prefixLength < 0){
       prefixLength += 7;
     }
 
-    var prefix = new Array(prefixLength).fill(0).map(function(value){
-
-      return {
-        type: 'prefix blank',
-        year: '',
-        month: '',
-        day: '',
-        iso: ''
-      }
-    }, this);
-
-    if(padMode==1){
-      
-      prefix = helper.generateDays(this.momentPrevMonth.daysInMonth()); // 1-n
-      prefix = lodash.takeRight(prefix, prefixLength).map(function(day){
+    var prefix = helper.generateDays(this.momentPrevMonth.daysInMonth()); // Get previous month's total number of days and place it in an array
+    prefix = lodash.takeRight(prefix, prefixLength); // Cut the parts we need
+    // Create prefix content
+    prefix = prefix.map(function(day){
         var year = this.momentPrevMonth.format('YYYY');
         var month = this.momentPrevMonth.format('M');
         var isoDateString = helper.isoDate(year, month, day);
+        var monthDay = moment.utc(isoDateString);
+        var isToday = (this.momentNow.format('YYYY-MM-DD') === monthDay.format("YYYY-MM-DD"));
 
-        return {
-          type: 'prefix',
-          year: year,
-          month: month,
-          day: day,
-          iso: isoDateString
+        if(padMode==0){
+          day = ''; // Blank it out
         }
+        return new DayObject(isToday, DayType.prefix, year, month, day, isoDateString);
       }, this);
-    }
-    prefix = prefix.map(this.prefixCallBack, this);
-    return prefix;
+
+    return prefix.map(this.prefixCallBack, this);
   }
 
   suffix(padMode){
 
-    // Suffix formula
+    // Suffix length formula
     const weekDays = 6; // 0-6 (7) days in a week
-    var suffixLength = weekDays - (this.weekDayLast - this.weekStart);
+    var suffixLength = weekDays - (this.weekDayLast - this.config.weekStart);
     if(suffixLength > 6){
       suffixLength = suffixLength - weekDays - 1;
     }
     
-    var suffix = new Array(suffixLength).fill(0).map(function(value){
+    var suffix = helper.generateDays(suffixLength);
+    // Create suffix content
+    suffix = suffix.map(function(day){
+        var year = this.momentNextMonth.format('YYYY');
+        var month = this.momentNextMonth.format('M');
+        var isoDateString = helper.isoDate(year, month, day);
+        var monthDay = moment.utc(isoDateString);
+        var isToday = (this.momentNow.format('YYYY-MM-DD') === monthDay.format("YYYY-MM-DD"));
 
-      return {
-        type: 'suffix blank',
-        year: '',
-        month: '',
-        day: '',
-        iso: ''
-      }
-    }, this);
+        if(padMode==0){
+          day = ''; // Blank it out
+        }
+        return new DayObject(isToday, DayType.suffix, year, month, day, isoDateString);
+      }, this);
 
-    if(padMode==1){
-      
-      var suffix = helper.generateDays(suffixLength)
-        .map(function(day){
-          var year = this.momentNextMonth.format('YYYY');
-          var month = this.momentNextMonth.format('M');
-          var isoDateString = helper.isoDate(year, month, day);
-          
-          return {
-            type: 'suffix',
-            year: year,
-            month: month,
-            day: day,
-            iso: isoDateString
-          }
-        }, this);
-    }
-    suffix = suffix.map(this.suffixCallBack, this);
-    
-    return suffix;
+    return suffix.map(this.suffixCallBack, this);
   }
 
 }
@@ -253,7 +244,7 @@ class DayView {
       timeZone: 0,
     };
     
-    config = Object.assign(defaults, config);
+    this.config = Object.assign(defaults, config);
 
     /**
      * @property {number} year - Number representing the year.
@@ -271,9 +262,9 @@ class DayView {
      * @property {Moment} prevDay - Instance of momentjs representing previous day.
      * @property {Moment} nextDay - Instance of momentjs representing next day.
      */
-    this.moment = moment.utc(isoDateString).add(config.timeZone, 'hours');
-    this.prevDay = moment.utc(isoDateString).add(config.timeZone, 'hours').subtract(1, 'days');
-    this.nextDay = moment.utc(isoDateString).add(config.timeZone, 'hours').add(1, 'days');
+    this.moment = moment.utc(isoDateString).add(this.config.timeZone, 'hours');
+    this.prevDay = moment.utc(isoDateString).add(this.config.timeZone, 'hours').subtract(1, 'days');
+    this.nextDay = moment.utc(isoDateString).add(this.config.timeZone, 'hours').add(1, 'days');
   }
 }
 module.exports = {
