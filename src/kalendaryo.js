@@ -126,8 +126,8 @@ class MonthView {
     if(!this.momentCurrentMonth.isValid()){
       // Handle error
     }
-    this.momentPrevMonth = moment.utc(isoDateString).subtract(1, 'days'); // Since we are already at first day of month, subtract 1 day
-    this.momentNextMonth = moment.utc(isoDateString).endOf('month').add(1, 'days'); // Move to last day of month, then add 1 day
+    this.momentPrevMonth = moment.utc(isoDateString).subtract(1, 'months'); // Since we are already at first day of month, subtract 1 day
+    this.momentNextMonth = moment.utc(isoDateString).add(1, 'months'); // Move to last day of month, then add 1 day
 
     this.year = year; // Year
     this.month = month; // Month 1-12
