@@ -5,7 +5,6 @@ const bodyParser = require('body-parser')
 const lodash = require('lodash');
 const jsonloader = require('jsonloader'); // json-loader
 const kalendaryo = require('./src/kalendaryo');
-const training = require('./src/training');
 
 // App
 const app = express();
@@ -89,6 +88,6 @@ app.get('/:year/:month', (req, res) => {
   res.render('month.html', vars );
 });
 
-app.listen(3000, function () {
-  console.log('Example app listening on port 3000!')
+app.listen(3002, function () {
+  console.log('Example app listening on port 3002!')
 });
