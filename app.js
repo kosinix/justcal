@@ -17,7 +17,7 @@ const njk = expressNunjucks(app, {
     watch: isDev,
     noCache: isDev,
     globals: {
-      baseUrl: "http://localhost:3000",
+      baseUrl: "http://localhost:3002",
       title: "Calendar"
     }
 });
