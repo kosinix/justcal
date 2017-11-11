@@ -70,6 +70,13 @@ var DayType = {
 
 /**
  * Represent a calendar day
+ * 
+ * @param {boolean} isToday - True if day is today.
+ * @param {DayType} type - See DayType.
+ * @param {number} year - Year in YYYY format.
+ * @param {number} month - Month in M format.
+ * @param {number} day - day in D format.
+ * @param {String} iso - ISO date time.
  */
 class DayObject {
   constructor(isToday, type, year, month, day, iso){
@@ -120,28 +127,31 @@ class MonthView {
     
     this.config = Object.assign(defaults, config);
 
-    this.momentNow = moment.utc().add(this.config.timeZone, 'hours');
     var isoDateString = helper.isoDate(year, month, 1); // First day of specific month
-    this.momentCurrentMonth = moment.utc(isoDateString); 
-    if(!this.momentCurrentMonth.isValid()){
+    var momentCurrentMonth = moment.utc(isoDateString); 
+    if(!momentCurrentMonth.isValid()){
       // Handle error
     }
-    this.momentPrevMonth = moment.utc(isoDateString).subtract(1, 'months'); // Since we are already at first day of month, subtract 1 day
-    this.momentNextMonth = moment.utc(isoDateString).add(1, 'months'); // Move to last day of month, then add 1 day
+    var momentPrevMonth = moment.utc(isoDateString).subtract(1, 'months'); // Since we are already at first day of month, subtract 1 day
+    var momentNextMonth = moment.utc(isoDateString).add(1, 'months'); // Move to last day of month, then add 1 day
 
-    this.year = year; // Year
-    this.month = month; // Month 1-12
-    this.name = this.momentCurrentMonth.format('MMM'); // String month name
-    this.days = this.momentCurrentMonth.daysInMonth(); // Total month days. 1-n
+    this.year = parseInt(year); // Year
+    this.month = parseInt(month); // Month 1-12
+    this.name = momentCurrentMonth.format('MMMM'); // String month name
+    this.days = momentCurrentMonth.daysInMonth(); // Total month days. 1-n
     this.weekDays = helper.getWeekDays(this.config.weekStart); // Array containing names of the days of the week (Sun, Mon, etc).
-    this.weekDayFirst = parseInt(this.momentCurrentMonth.format('d')); // First day of week. Zero-based. 0-6
+    this.weekDayFirst = parseInt(momentCurrentMonth.format('d')); // First day of week. Zero-based. 0-6
     this.weekDayLast = parseInt(moment.utc(isoDateString).endOf('month').format('d')); // This months last day of week. Zero-based. 0-6
     this.matrix = [];
-    this.prevMonthYear = this.momentPrevMonth.format('YYYY');
-    this.prevMonthNumber = this.momentPrevMonth.format('M');
-    this.nextMonthYear = this.momentNextMonth.format('YYYY');
-    this.nextMonthNumber = this.momentNextMonth.format('M');
-
+    // Previous month info
+    this.prevMonthYear = parseInt(momentPrevMonth.format('YYYY'));
+    this.prevMonthNumber = parseInt(momentPrevMonth.format('M'));
+    this.prevMonthDays = parseInt(momentPrevMonth.daysInMonth());
+    // Next month info
+    this.nextMonthYear = parseInt(momentNextMonth.format('YYYY'));
+    this.nextMonthNumber = parseInt(momentNextMonth.format('M'));
+    this.nextMonthDays = parseInt(momentNextMonth.daysInMonth());
+    
     this.dayCallBack = this.config.dayCallBack;
     this.prefixCallBack = this.config.prefixCallBack;
     this.suffixCallBack = this.config.suffixCallBack;
@@ -153,11 +163,11 @@ class MonthView {
   matrixes(){
     
     var days = helper.generateDays(this.days); // Generate days for this month
-      
+    var momentNow = moment.utc().add(this.config.timeZone, 'hours');
     days = days.map(function(day){
       var isoDateString = helper.isoDate(this.year, this.month, day);
       var monthDay = moment.utc(isoDateString);
-      var isToday = (this.momentNow.format('YYYY-MM-DD') === monthDay.format("YYYY-MM-DD"));
+      var isToday = (momentNow.format('YYYY-MM-DD') === monthDay.format("YYYY-MM-DD"));
 
       return new DayObject(isToday, DayType.day, this.year, this.month, day, isoDateString);
       
@@ -178,15 +188,16 @@ class MonthView {
       prefixLength += 7;
     }
 
-    var prefix = helper.generateDays(this.momentPrevMonth.daysInMonth()); // Get previous month's total number of days and place it in an array
+    var prefix = helper.generateDays(this.prevMonthDays); // Get previous month's total number of days and place it in an array
     prefix = lodash.takeRight(prefix, prefixLength); // Cut the parts we need
+    var momentNow = moment.utc().add(this.config.timeZone, 'hours');
     // Create prefix content
     prefix = prefix.map(function(day){
-        var year = this.momentPrevMonth.format('YYYY');
-        var month = this.momentPrevMonth.format('M');
+        var year = this.prevMonthYear;
+        var month = this.prevMonthNumber;
         var isoDateString = helper.isoDate(year, month, day);
         var monthDay = moment.utc(isoDateString);
-        var isToday = (this.momentNow.format('YYYY-MM-DD') === monthDay.format("YYYY-MM-DD"));
+        var isToday = (momentNow.format('YYYY-MM-DD') === monthDay.format("YYYY-MM-DD"));
 
         if(padMode==0){
           day = ''; // Blank it out
@@ -207,13 +218,15 @@ class MonthView {
     }
     
     var suffix = helper.generateDays(suffixLength);
+    var momentNow = moment.utc().add(this.config.timeZone, 'hours');
+
     // Create suffix content
     suffix = suffix.map(function(day){
-        var year = this.momentNextMonth.format('YYYY');
-        var month = this.momentNextMonth.format('M');
+        var year = this.nextMonthYear;
+        var month = this.nextMonthNumber;
         var isoDateString = helper.isoDate(year, month, day);
         var monthDay = moment.utc(isoDateString);
-        var isToday = (this.momentNow.format('YYYY-MM-DD') === monthDay.format("YYYY-MM-DD"));
+        var isToday = (momentNow.format('YYYY-MM-DD') === monthDay.format("YYYY-MM-DD"));
 
         if(padMode==0){
           day = ''; // Blank it out
